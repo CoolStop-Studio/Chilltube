@@ -16,6 +16,7 @@ app.use(express.static(fileFolder));
 const pages = {
   "/": "main/main.html",
   "/search": "search/search.html",
+  "/video": "video/video.html",
 };
 
 // Serve the main application page

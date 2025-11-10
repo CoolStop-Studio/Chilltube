@@ -1,0 +1,11 @@
+img {
+    border-radius: 10px;
+}
+
+.result {
+    margin: 10px;
+    background-color: #16162780;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}

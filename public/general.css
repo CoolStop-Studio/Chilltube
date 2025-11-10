@@ -1,0 +1,76 @@
+:root {
+    --highlight: #EBDDD6;
+    --mid: #2A2D3C;
+    --dark: #161627;
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+body {
+    background-image: linear-gradient(45deg, #161627, #2d2d3e);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;  /* center horizontally */
+    align-items: center;      /* center vertically */
+    height: 100vh;
+}
+
+.center {
+    display: flex;
+    flex-direction: column; /* stack items vertically */
+    align-items: center;    /* center horizontally */
+}
+
+h1 {
+    color: var(--highlight);
+    font-size: 8vw;
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+    text-shadow: 0px 0px 30px rgba(0, 0, 0, 1.0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #16162780;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

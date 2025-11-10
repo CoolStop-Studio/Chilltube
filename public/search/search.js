@@ -41,13 +41,13 @@ function searchYouTube(query) {
         const title = item.snippet.title;
         const videoId = item.id.videoId;
         const thumb = item.snippet.thumbnails.default.url;
+
         $('#results').append(`
-            <div>
-            <img src="${thumb}" alt="${title}">
-            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">${title}</a>
+            <div class="result" onclick="window.location.href = '/video?v=${videoId}'">
+                <img src="${thumb}" alt="${title}">
+                <p href="/video?v=${videoId}" target="_blank">${title}</p>
             </div>
         `);
         });
     });
 }
-      

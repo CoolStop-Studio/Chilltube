@@ -16,7 +16,7 @@ html, body {
 }
 
 body {
-    background-image: linear-gradient(45deg, #161627, #2d2d3e);
+    background-image: linear-gradient(45deg, #111120, #38384f);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -59,7 +59,7 @@ h1 {
 
 
 .nav_item {
-  margin: 10px;
+  margin: 15px;
   width: 4vh;
   height: 4vh;
 }
@@ -79,6 +79,6 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 0px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }

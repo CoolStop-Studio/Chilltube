@@ -40,12 +40,17 @@ function searchYouTube(query) {
         results.forEach(item => {
         const title = item.snippet.title;
         const videoId = item.id.videoId;
-        const thumb = item.snippet.thumbnails.default.url;
+        const thumb = item.snippet.thumbnails.high.url;
+        const channel = item.snippet.channelTitle
+        const time = item.snippet.publishedAt
 
         $('#results').append(`
             <div class="result" onclick="window.location.href = '/video?v=${videoId}'">
                 <img src="${thumb}" alt="${title}">
-                <p href="/video?v=${videoId}" target="_blank">${title}</p>
+                <div>
+                    <h3>${title}</h3>
+                    <p>${channel} | ${time}</p>
+                </div>
             </div>
         `);
         });

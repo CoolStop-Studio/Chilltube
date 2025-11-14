@@ -42,8 +42,7 @@ function searchYouTube(query) {
         const videoId = item.id.videoId;
         const thumb = item.snippet.thumbnails.high.url;
         const channel = item.snippet.channelTitle
-        const time = item.snippet.publishedAt
-
+        const time = timeAgo(item.snippet.publishedAt);
         $('#results').append(`
             <div class="result" onclick="window.location.href = '/video?v=${videoId}'">
                 <img src="${thumb}" alt="${title}">

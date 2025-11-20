@@ -1,5 +1,5 @@
 :root {
-    --highlight: #EBDDD6;
+    --highlight: #d6ebe9;
     --mid: #2A2D3C;
     --dark: #161627;
 }
@@ -59,9 +59,15 @@ h1 {
 
 
 .nav_item {
-  margin: 15px;
+  margin: 0.5vw;
   width: 4vh;
   height: 4vh;
+}
+
+.nav_item_container {
+  display: flex;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
 }
 
 .nav_item img {
@@ -82,4 +88,18 @@ h1 {
     align-items: center;
     padding: 0 0px;
     box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2);
+}
+
+#top_search {
+    padding: 1vw 1vw;
+    border-radius: 9999px;
+    border: none;
+    font-size: 1.0vw;
+    background-color: rgba(33, 33, 60, 0.502);
+    box-sizing: border-box;
+    color: var(--highlight);
+    outline: none;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
+    width: 50%;
+    height: 60%; /* fixed height for predictable centering */
 }

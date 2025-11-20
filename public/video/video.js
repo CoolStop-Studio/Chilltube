@@ -18,6 +18,8 @@ function loadYouTubeAPI() {
 
 loadYouTubeAPI().then((YT) => {
     console.log("YT API Loaded");
+    const query = localStorage.getItem('q');
+    document.getElementById("top_search").value = query
 
     const params = new URLSearchParams(window.location.search);
     const video = params.get('v');
@@ -48,13 +50,19 @@ function onPlayerStateChange(event) {
 console.log("State changed:", event.data);
 }
 
-while (true) {
-    var el = document.getElementById("player")
-    el.width = window.innerWidth + 'px'
-    el.height = window.innerHeight - (0.12 * window.innerHeight) + 'px'
-}
 
-// You can call methods like:
-// player.playVideo();
-// player.pauseVideo();
-// player.seekTo(60); // jump to 1:00
+
+document.addEventListener('DOMContentLoaded', function() {
+    const top_search = document.getElementById('top_search');
+
+    top_search.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); 
+            const term = top_search.value.trim();
+            if (term !== '') {
+                // redirect with query string
+                window.location.href = `/search?q=${encodeURIComponent(term)}`;
+            }
+        }
+    });
+});

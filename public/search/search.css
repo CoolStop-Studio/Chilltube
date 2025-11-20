@@ -5,6 +5,10 @@
     border-radius: 1.5vw;
 }
 
+#results {
+    font-size: 1vw;
+    color: var(--highlight);
+}
 
 
 .result {

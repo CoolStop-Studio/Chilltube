@@ -1,6 +1,7 @@
 :root {
     --highlight: #d6ebe9;
-    --mid: #2A2D3C;
+    --light: rgba(45, 45, 80, 0.6);
+    --mid: rgba(33, 33, 60, 0.5);
     --dark: #161627;
 }
 

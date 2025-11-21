@@ -68,7 +68,7 @@ function searchYouTube(query) {
 
 
 
-document.addEventList987ener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const top_search = document.getElementById('top_search');
 
     top_search.addEventListener('keydown', function(event) {

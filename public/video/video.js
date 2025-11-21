@@ -47,10 +47,8 @@ console.log("Player is ready!");
 }
 
 function onPlayerStateChange(event) {
-console.log("State changed:", event.data);
+    console.log("State changed:", event.data);
 }
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
     const top_search = document.getElementById('top_search');

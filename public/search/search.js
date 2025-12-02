@@ -1,15 +1,33 @@
 window.onload = function() {
     init();
 };
+async function resolveChannelId(channel) {
+    if (!channel || !channel.startsWith('@')) return channel; 
 
-function onYouTubeApiLoad() {
+    const response = await gapi.client.youtube.search.list({
+        part: 'snippet',
+        q: channel,
+        type: 'channel',
+        maxResults: 1
+    });
+
+    const item = response.result.items[0];
+    return item ? item.id.channelId : null;
+}
+
+async function onYouTubeApiLoad() {
   const params = new URLSearchParams(window.location.search);
   const query = params.get('q');
+const channel = params.get('c');
+  const channel_ID = await resolveChannelId(channel);
+
   document.getElementById("top_search").value = query
   localStorage.setItem('q', query);
+  localStorage.setItem('c', channel);
+
 
   if (query) {
-    searchYouTube(query);
+    searchYouTube(query, channel_ID);
   } else {
     console.log('No search query provided');
   }
@@ -27,10 +45,11 @@ function init() {
     });
 }
 
-function searchYouTube(query) {
+function searchYouTube(query, channel) {
     const request = gapi.client.youtube.search.list({
         part: 'snippet',
         q: query,
+        channelId: channel,
         type: 'video',
         maxResults: 30
     });
@@ -76,8 +95,11 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault(); 
             const term = top_search.value.trim();
             if (term !== '') {
-                // redirect with query string
-                window.location.href = `/search?q=${encodeURIComponent(term)}`;
+                if (localStorage.getItem('c')) {
+                    window.location.href = `/search?q=${encodeURIComponent(term)}&c=${localStorage.getItem('c')}`;
+                } else {
+                    window.location.href = `/search?q=${encodeURIComponent(term)}`;
+                }
             }
         }
     });

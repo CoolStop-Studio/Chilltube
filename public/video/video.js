@@ -58,8 +58,11 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault(); 
             const term = top_search.value.trim();
             if (term !== '') {
-                // redirect with query string
-                window.location.href = `/search?q=${encodeURIComponent(term)}`;
+                if (localStorage.getItem('c')) {
+                    window.location.href = `/search?q=${encodeURIComponent(term)}&c=${localStorage.getItem('c')}`;
+                } else {
+                    window.location.href = `/search?q=${encodeURIComponent(term)}`;
+                }
             }
         }
     });

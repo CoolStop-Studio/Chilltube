@@ -11,12 +11,13 @@ const __dirname = dirname(__filename);
 const fileFolder = join(__dirname, 'public');
 const fileName = "main/main.html";
 
-app.use(express.static(fileFolder));
+app.use(express.static(fileFolder, { redirect: false }));
 
 const pages = {
   "/": "main/main.html",
   "/search": "search/search.html",
   "/video": "video/video.html",
+  "/channel": "channel/channel.html",
 };
 
 // Serve the main application page

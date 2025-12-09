@@ -8,13 +8,14 @@
 #results {
     font-size: 1vw;
     color: var(--highlight);
+    margin-top: calc(6vh + 0.5vw);
 }
 
 
 .result {
     display: flex;
     overflow: hidden;
-    margin: 10px;
+    margin: 0.5vw;
     background-color: #16162780;
     padding: 0px;
     border-radius: 2vw;

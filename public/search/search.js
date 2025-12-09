@@ -9,7 +9,7 @@ async function resolveChannelId(channel) {
         q: channel,
         type: 'channel',
         maxResults: 1
-    });
+    }); 
 
     const item = response.result.items[0];
     return item ? item.id.channelId : null;
@@ -18,7 +18,7 @@ async function resolveChannelId(channel) {
 async function onYouTubeApiLoad() {
   const params = new URLSearchParams(window.location.search);
   const query = params.get('q');
-const channel = params.get('c');
+  const channel = params.get('c');
   const channel_ID = await resolveChannelId(channel);
 
   document.getElementById("top_search").value = query
@@ -28,9 +28,16 @@ const channel = params.get('c');
 
   if (query) {
     searchYouTube(query, channel_ID);
-  } else {
-    console.log('No search query provided');
-  }
+    return;
+    }
+
+    if (channel_ID) {
+        console.log("Loading recent channel videos...");
+        searchYouTube(null, channel_ID);
+        return;
+    }
+
+    console.log("No search query and no channel provided");
 }
 
 
@@ -51,7 +58,8 @@ function searchYouTube(query, channel) {
         q: query,
         channelId: channel,
         type: 'video',
-        maxResults: 30
+        maxResults: 30,
+        order: 'date'
     });
 
     request.execute(response => {

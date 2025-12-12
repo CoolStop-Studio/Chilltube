@@ -1,6 +1,9 @@
 window.onload = function() {
     init();
 };
+
+let query
+let channel_ID
 async function resolveChannelId(channel) {
     if (!channel || !channel.startsWith('@')) return channel; 
 
@@ -17,29 +20,32 @@ async function resolveChannelId(channel) {
 
 async function onYouTubeApiLoad() {
   const params = new URLSearchParams(window.location.search);
-  const query = params.get('q');
+  query = params.get('q');
+  if (query != null) {
+    document.getElementById("top_search_input").value = query
+  }
   const channel = params.get('c');
-  const channel_ID = await resolveChannelId(channel);
-
-  document.getElementById("top_search").value = query
+  if (channel != null) {
+    channel_ID = await resolveChannelId(channel);
+  }
   localStorage.setItem('q', query);
   localStorage.setItem('c', channel);
 
-
-  if (query) {
-    searchYouTube(query, channel_ID);
-    return;
-    }
-
-    if (channel_ID) {
-        console.log("Loading recent channel videos...");
-        searchYouTube(null, channel_ID);
-        return;
-    }
-
-    console.log("No search query and no channel provided");
+  new_search(query, channel_ID)
 }
 
+function new_search(q, c, order) {
+    if (query) {
+        searchYouTube(query, channel_ID, order);
+        return;
+    } else if (channel_ID) {
+        console.log("Loading recent channel videos...");
+        searchYouTube(null, channel_ID, order);
+        return; 
+    }
+    
+    console.log("No search query and no channel provided");
+}
 
 
 const API_KEY = 'AIzaSyD3sYwQT-Q31roZcky7T_bskNIzGqTwQWM';
@@ -52,14 +58,17 @@ function init() {
     });
 }
 
-function searchYouTube(query, channel) {
+let current_order = 'relevance'
+
+function searchYouTube(query, channel, order) {
     const request = gapi.client.youtube.search.list({
         part: 'snippet',
         q: query,
         channelId: channel,
         type: 'video',
-        maxResults: 30,
-        order: 'date'
+        maxResults: 10,
+        order: order,
+        relevanceLanguage: 'en'
     });
 
     request.execute(response => {
@@ -96,14 +105,14 @@ function searchYouTube(query, channel) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    const top_search = document.getElementById('top_search');
+    const top_search = document.getElementById('top_search_input');
 
     top_search.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
             event.preventDefault(); 
             const term = top_search.value.trim();
             if (term !== '') {
-                if (localStorage.getItem('c')) {
+                if (localStorage.getItem('c') != 'null') {
                     window.location.href = `/search?q=${encodeURIComponent(term)}&c=${localStorage.getItem('c')}`;
                 } else {
                     window.location.href = `/search?q=${encodeURIComponent(term)}`;
@@ -112,3 +121,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+function switch_order() {
+    document.getElementById("results").innerHTML = "Loading..."
+    let button = document.getElementById("top_search_button")
+    if (current_order == 'relevance') {
+        current_order = 'date';
+        button.innerHTML = "Date";
+    }
+    else if (current_order == 'date') {
+        current_order = 'viewCount';
+        button.innerHTML = "Views";
+    }
+    else if (current_order == 'viewCount') {
+        current_order = 'relevance';
+        button.innerHTML = "Relevance";
+    }
+    new_search(query, channel_ID, current_order);
+}

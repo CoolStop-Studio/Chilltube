@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
       event.preventDefault(); 
       const term = search.value.trim();
       if (term !== '') {
-        // redirect with query string
-        window.location.href = `/search?q=${encodeURIComponent(term)}`;
+        window.location.href = generateURL(term)
       }
     }
   });

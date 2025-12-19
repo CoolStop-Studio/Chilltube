@@ -37,3 +37,16 @@ function generateURL(term) {
         return `/search?q=${encodeURIComponent(term)}`;
     }
 }
+
+function URLgenerate(c, q) {
+    if (term[0] == '@') {
+        const firstSpace = term.indexOf(' ')
+        if (firstSpace != -1) {
+            return `/search?q=${encodeURIComponent(term.slice(firstSpace + 1))}&c=${encodeURIComponent(term.slice(0, firstSpace))}`;
+        } else {
+            return `/search?c=${encodeURIComponent(term)}`;
+        }
+    } else {
+        return `/search?q=${encodeURIComponent(term)}`;
+    }
+}

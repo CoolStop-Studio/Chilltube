@@ -21,10 +21,10 @@ async function resolveChannelId(channel) {
 async function onYouTubeApiLoad() {
   const params = new URLSearchParams(window.location.search);
   query = params.get('q');
+  const channel = params.get('c');
   if (query != null) {
     document.getElementById("top_search_input").value = query
   }
-  const channel = params.get('c');
   if (channel != null) {
     channel_ID = await resolveChannelId(channel);
   }

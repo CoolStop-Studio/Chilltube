@@ -17,7 +17,6 @@ const pages = {
   "/": "main/main.html",
   "/search": "search/search.html",
   "/video": "video/video.html",
-  "/channel": "channel/channel.html",
 };
 
 // Serve the main application page

@@ -29,7 +29,7 @@ function generateURL(term) {
     if (term[0] == '@') {
         const firstSpace = term.indexOf(' ')
         if (firstSpace != -1) {
-            return `/search?q=${encodeURIComponent(term.slice(firstSpace))}&c=${encodeURIComponent(term.slice(0, firstSpace))}`;
+            return `/search?q=${encodeURIComponent(term.slice(firstSpace + 1))}&c=${encodeURIComponent(term.slice(0, firstSpace))}`;
         } else {
             return `/search?c=${encodeURIComponent(term)}`;
         }
